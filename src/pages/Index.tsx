@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import CategoryTabs from '@/components/CategoryTabs';
@@ -7,6 +6,7 @@ import ArticleView from '@/components/ArticleView';
 import SearchView from '@/components/SearchView';
 import BottomNavigation from '@/components/BottomNavigation';
 import LoadingSkeleton from '@/components/LoadingSkeleton';
+import EditableProfile from '@/components/EditableProfile';
 import { toast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -16,6 +16,13 @@ const Index = () => {
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
   const [articles, setArticles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [userProfile, setUserProfile] = useState({
+    location: 'Auckland, New Zealand',
+    age: '28 years old',
+    occupation: 'Software Developer',
+    income: '$75,000 NZD',
+    interests: ['Housing', 'Technology', 'Environment']
+  });
 
   const categories = [
     { id: 'all', name: 'All', color: 'bg-gray-600', bgColor: 'bg-gray-100', image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=200&h=200&fit=crop' },
@@ -31,15 +38,19 @@ const Index = () => {
       id: '1',
       title: 'New Zealand Housing Crisis: Government Announces $2.8B Investment Package',
       summary: 'The coalition government unveils a comprehensive housing package aimed at addressing affordability challenges across major cities.',
-      content: 'The New Zealand government has announced a significant $2.8 billion investment package to tackle the ongoing housing crisis that has affected thousands of families across the country.\n\nThe package includes measures to fast-track housing development, provide first-home buyer grants, and increase social housing stock by 15,000 units over the next three years.\n\nHousing Minister Chris Bishop outlined the key components of the package, emphasizing the government\'s commitment to making homeownership more accessible for working families.\n\nThe initiative comes as house prices in Auckland and Wellington remain among the highest in the world relative to income, with many young New Zealanders struggling to enter the property market.',
+      content: 'The New Zealand government has announced a significant $2.8 billion investment package to tackle the ongoing housing crisis that has affected thousands of families across the country.\n\nThe package includes measures to fast-track housing development, provide first-home buyer grants, and increase social housing stock by 15,000 units over the next three years.\n\nHousing Minister Chris Bishop outlined the key components of the package, emphasizing the government\'s commitment to making homeownership more accessible for working families.\n\nThe initiative comes as house prices in Auckland and Wellington remain among the highest in the world relative to income, with many young New Zealanders struggling to enter the property market.\n\nThe fast-track consenting process is expected to reduce development timeframes by up to 12 months, while new partnerships with private developers will help deliver affordable housing faster.\n\nCritics argue that the package doesn\'t address underlying supply constraints, but supporters believe it represents a significant step toward housing affordability.',
       category: 'Politics',
       categoryColor: 'bg-red-600',
       image: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600&h=400&fit=crop',
-      source: 'NZ Herald',
+      source: 'Stuff.co.nz',
       author: 'Sarah Mitchell',
       timestamp: '2 hours ago',
       readTime: '3 min',
       isBookmarked: false,
+      hasAudio: true,
+      hasVideo: false,
+      pullQuote: 'This represents the largest housing investment in New Zealand\'s recent history, targeting the core issues that have made homeownership a distant dream for many Kiwis.',
+      contentImages: ['https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop'],
       personalizedInsight: 'As a young professional in Auckland, this could help you access first-home buyer grants of up to $10,000.',
       personalizedForYou: 'Based on your profile as a 28-year-old professional earning $75,000 in Auckland, this housing package could significantly impact your ability to purchase your first home. The new first-home buyer grants could provide you with up to $10,000 in assistance, while the fast-tracked development could help stabilize prices in your preferred areas.',
       positiveBenefits: [
@@ -50,22 +61,22 @@ const Index = () => {
       ],
       actionItems: [
         {
-          type: 'resource',
-          title: 'Check Grant Eligibility',
-          description: 'Use the official calculator to see your grant amount',
-          link: 'https://kaingaora.govt.nz/first-home-grant'
+          type: 'article',
+          title: 'Home Buying Guide 2024',
+          description: 'Complete guide for first-time buyers in NZ',
+          link: '/article/home-buying-guide-2024'
+        },
+        {
+          type: 'article',
+          title: 'Auckland Housing Market Analysis',
+          description: 'Latest trends and predictions for Auckland property',
+          link: '/article/auckland-housing-analysis'
         },
         {
           type: 'contact',
           title: 'Contact Local MP',
           description: 'Share your housing story with Chloe Swarbrick',
           link: 'mailto:chloe.swarbrick@parliament.govt.nz'
-        },
-        {
-          type: 'article',
-          title: 'Home Buying Guide 2024',
-          description: 'Complete guide for first-time buyers in NZ',
-          link: '#'
         }
       ]
     },
@@ -149,10 +160,53 @@ const Index = () => {
     }
   ];
 
+  const generateMoreArticles = () => {
+    const sources = ['Stuff.co.nz', 'The Press', 'The Post', 'Waikato Times'];
+    const categories = ['Politics', 'Economy', 'Health', 'Environment', 'Technology'];
+    const authors = ['Sarah Mitchell', 'Mike Chen', 'Emma Thompson', 'David Wilson', 'Lisa Park', 'Tom Brown'];
+    
+    const additionalArticles = [];
+    for (let i = 5; i <= 22; i++) {
+      additionalArticles.push({
+        id: i.toString(),
+        title: `Breaking: Major Development in ${categories[i % categories.length]} Sector Affects Thousands`,
+        summary: `Latest updates on significant ${categories[i % categories.length].toLowerCase()} developments across New Zealand with local impact analysis.`,
+        content: `This is a developing story about ${categories[i % categories.length].toLowerCase()} issues affecting New Zealand communities.\n\nLocal authorities have confirmed significant changes that will impact residents across multiple regions.\n\nExperts suggest this development will have lasting effects on the community and economy.\n\nWe will continue to monitor this story and provide updates as more information becomes available.`,
+        category: categories[i % categories.length],
+        categoryColor: i % 2 === 0 ? 'bg-blue-600' : 'bg-green-600',
+        image: `https://images.unsplash.com/photo-${1480000000000 + i}?w=600&h=400&fit=crop`,
+        source: sources[i % sources.length],
+        author: authors[i % authors.length],
+        timestamp: `${i} hours ago`,
+        readTime: `${2 + (i % 4)} min`,
+        isBookmarked: false,
+        hasAudio: i % 3 === 0,
+        hasVideo: i % 4 === 0,
+        pullQuote: `This represents a significant shift in New Zealand's ${categories[i % categories.length].toLowerCase()} landscape.`,
+        personalizedInsight: `This development could directly impact your ${userProfile.interests[0].toLowerCase()} interests.`,
+        personalizedForYou: `Based on your profile and interests, this ${categories[i % categories.length].toLowerCase()} development could have implications for your daily life and future planning.`,
+        positiveBenefits: [
+          'Potential positive impact on your sector',
+          'New opportunities may arise',
+          'Improved local services expected'
+        ],
+        actionItems: [
+          {
+            type: 'article',
+            title: `Related ${categories[i % categories.length]} News`,
+            description: `More stories about ${categories[i % categories.length].toLowerCase()} developments`,
+            link: `/category/${categories[i % categories.length].toLowerCase()}`
+          }
+        ]
+      });
+    }
+    return additionalArticles;
+  };
+
   useEffect(() => {
     // Simulate loading
     setTimeout(() => {
-      setArticles(mockArticles);
+      setArticles([...mockArticles, ...generateMoreArticles()]);
       setLoading(false);
     }, 1500);
   }, []);
@@ -198,6 +252,16 @@ const Index = () => {
     setCurrentView('article');
   };
 
+  const getRelatedArticles = (currentArticle: any) => {
+    return articles
+      .filter(article => 
+        article.id !== currentArticle.id && 
+        (article.category === currentArticle.category || 
+         article.source === currentArticle.source)
+      )
+      .slice(0, 5);
+  };
+
   if (currentView === 'search') {
     return (
       <SearchView
@@ -215,9 +279,11 @@ const Index = () => {
     return (
       <ArticleView
         article={selectedArticle}
+        relatedArticles={getRelatedArticles(selectedArticle)}
         onBack={() => setCurrentView('home')}
         onBookmark={handleBookmark}
         onShare={handleShare}
+        onArticleClick={handleArticleClick}
       />
     );
   }
@@ -281,31 +347,10 @@ const Index = () => {
 
       {activeTab === 'profile' && (
         <div className="p-4">
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Your Profile</h2>
-            <div className="space-y-4">
-              <div>
-                <label className="text-sm font-medium text-gray-700">Location</label>
-                <p className="text-gray-900">Auckland, New Zealand</p>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-700">Age</label>
-                <p className="text-gray-900">28 years old</p>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-700">Occupation</label>
-                <p className="text-gray-900">Software Developer</p>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-700">Income</label>
-                <p className="text-gray-900">$75,000 NZD</p>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-700">Interests</label>
-                <p className="text-gray-900">Housing, Technology, Environment</p>
-              </div>
-            </div>
-          </div>
+          <EditableProfile 
+            profile={userProfile}
+            onProfileUpdate={setUserProfile}
+          />
         </div>
       )}
 

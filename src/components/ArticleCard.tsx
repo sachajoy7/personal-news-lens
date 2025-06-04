@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BookmarkIcon, Share } from 'lucide-react';
+import { BookmarkIcon, Share, headphones, video } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -16,6 +16,8 @@ interface Article {
   readTime: string;
   isBookmarked: boolean;
   personalizedInsight?: string;
+  hasAudio?: boolean;
+  hasVideo?: boolean;
 }
 
 interface ArticleCardProps {
@@ -38,12 +40,22 @@ const ArticleCard = ({ article, onBookmark, onShare, onClick }: ArticleCardProps
           alt={article.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-3 left-3 flex items-center space-x-2">
           <Badge 
             className={`${article.categoryColor} text-white font-medium px-3 py-1`}
           >
             {article.category}
           </Badge>
+          {article.hasAudio && (
+            <Badge className="bg-purple-500 text-white px-2 py-1">
+              <headphones className="w-3 h-3" />
+            </Badge>
+          )}
+          {article.hasVideo && (
+            <Badge className="bg-red-500 text-white px-2 py-1">
+              <video className="w-3 h-3" />
+            </Badge>
+          )}
         </div>
         <div className="absolute top-3 right-3 flex space-x-2">
           <Button
