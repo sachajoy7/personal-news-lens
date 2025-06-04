@@ -17,10 +17,11 @@ const Index = () => {
   const [articles, setArticles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [userProfile, setUserProfile] = useState({
+    name: 'Alex Morgan',
     location: 'Auckland, New Zealand',
     age: '28 years old',
     occupation: 'Software Developer',
-    income: '$75,000 NZD',
+    income: 'Medium Income (40k - 100k)',
     interests: ['Housing', 'Technology', 'Environment']
   });
 

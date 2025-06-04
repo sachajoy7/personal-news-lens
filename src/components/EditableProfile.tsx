@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Edit2, Save, X } from 'lucide-react';
 
 interface UserProfile {
+  name: string;
   location: string;
   age: string;
   occupation: string;
@@ -25,6 +27,12 @@ const EditableProfile = ({ profile, onProfileUpdate }: EditableProfileProps) => 
   const availableInterests = [
     'Housing', 'Technology', 'Environment', 'Politics', 'Economy', 'Health',
     'Education', 'Transport', 'Crime', 'Sports', 'Arts', 'Tourism'
+  ];
+
+  const incomeOptions = [
+    'Low Income (Under 40k)',
+    'Medium Income (40k - 100k)',
+    'High Income (Over 100k)'
   ];
 
   const handleSave = () => {
@@ -77,6 +85,21 @@ const EditableProfile = ({ profile, onProfileUpdate }: EditableProfileProps) => 
 
       <div className="space-y-4">
         <div>
+          <label className="text-sm font-medium text-gray-700">Name</label>
+          {isEditing ? (
+            <input
+              type="text"
+              value={editedProfile.name}
+              onChange={(e) => setEditedProfile({...editedProfile, name: e.target.value})}
+              className="w-full mt-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your name"
+            />
+          ) : (
+            <p className="text-gray-900">{profile.name}</p>
+          )}
+        </div>
+
+        <div>
           <label className="text-sm font-medium text-gray-700">Location</label>
           {isEditing ? (
             <input
@@ -119,14 +142,23 @@ const EditableProfile = ({ profile, onProfileUpdate }: EditableProfileProps) => 
         </div>
 
         <div>
-          <label className="text-sm font-medium text-gray-700">Income</label>
+          <label className="text-sm font-medium text-gray-700">Income Level</label>
           {isEditing ? (
-            <input
-              type="text"
-              value={editedProfile.income}
-              onChange={(e) => setEditedProfile({...editedProfile, income: e.target.value})}
-              className="w-full mt-1 px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <Select 
+              value={editedProfile.income} 
+              onValueChange={(value) => setEditedProfile({...editedProfile, income: value})}
+            >
+              <SelectTrigger className="w-full mt-1">
+                <SelectValue placeholder="Select income level" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                {incomeOptions.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           ) : (
             <p className="text-gray-900">{profile.income}</p>
           )}
