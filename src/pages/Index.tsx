@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import CategoryTabs from '@/components/CategoryTabs';
@@ -186,6 +185,271 @@ const Index = () => {
     }
   ];
 
+  const generatePersonalizedContent = (article: any, profile: any) => {
+    const age = parseInt(profile.age) || 28;
+    const location = profile.location || 'Auckland, New Zealand';
+    const occupation = profile.occupation || 'Software Developer';
+    const income = profile.income || 'Medium Income (40k - 100k)';
+    const interests = profile.interests || ['Housing', 'Technology', 'Environment'];
+
+    // Generate personalized insight based on category and profile
+    let personalizedInsight = '';
+    let personalizedForYou = '';
+    let positiveBenefits: string[] = [];
+    let actionItems = [];
+
+    switch (article.category.toLowerCase()) {
+      case 'politics':
+        if (interests.includes('Housing')) {
+          personalizedInsight = `As someone interested in housing in ${location.split(',')[0]}, this policy could affect your housing costs.`;
+          personalizedForYou = `Given your profile as a ${age}-year-old ${occupation.toLowerCase()} in ${location} with ${income.toLowerCase()}, this housing policy could significantly impact your ability to purchase or rent property. The new measures may provide financial assistance or affect market prices in your area.`;
+          positiveBenefits = [
+            'Potential access to first-home buyer assistance',
+            'May stabilize housing prices in your area',
+            'Could improve rental market conditions',
+            'New housing developments planned for your region'
+          ];
+        } else {
+          personalizedInsight = `This political development may affect services and policies in ${location.split(',')[0]}.`;
+          personalizedForYou = `As a ${age}-year-old ${occupation.toLowerCase()} in ${location}, these political changes could impact various aspects of your daily life, from taxes to public services.`;
+          positiveBenefits = [
+            'Improved public services in your area',
+            'Potential tax benefits for your income bracket',
+            'Enhanced infrastructure development',
+            'Better community programs'
+          ];
+        }
+        actionItems = [
+          {
+            type: 'article' as const,
+            title: 'Local Government Services',
+            description: `Find services and support in ${location.split(',')[0]}`,
+            link: '/local-services'
+          },
+          {
+            type: 'article' as const,
+            title: 'Voting Information',
+            description: 'Learn about your voting rights and upcoming elections',
+            link: '/voting-guide'
+          },
+          {
+            type: 'article' as const,
+            title: 'Community Groups',
+            description: 'Connect with local community organizations',
+            link: '/community'
+          },
+          {
+            type: 'article' as const,
+            title: 'Policy Impact Calculator',
+            description: 'See how new policies affect your finances',
+            link: '/policy-calculator'
+          }
+        ];
+        break;
+
+      case 'economy':
+        personalizedInsight = `This economic change could save you approximately $15-30 per week based on your lifestyle.`;
+        personalizedForYou = `With your ${income.toLowerCase()} and lifestyle in ${location}, this economic development could provide meaningful savings. Your weekly commute and household expenses could be reduced significantly.`;
+        positiveBenefits = [
+          `Save approximately $60-120 per month`,
+          'Reduced pressure on household budget',
+          'More money available for savings or investments',
+          'Lower cost of living in your area'
+        ];
+        actionItems = [
+          {
+            type: 'article' as const,
+            title: 'Budget Planning Tools',
+            description: 'Manage your finances with smart budgeting',
+            link: '/budget-tools'
+          },
+          {
+            type: 'article' as const,
+            title: 'Investment Opportunities',
+            description: 'Learn about investment options for your income level',
+            link: '/investments'
+          },
+          {
+            type: 'article' as const,
+            title: 'Cost of Living Calculator',
+            description: `Compare living costs in ${location.split(',')[0]}`,
+            link: '/cost-calculator'
+          },
+          {
+            type: 'article' as const,
+            title: 'Financial Planning Guide',
+            description: 'Plan your financial future with expert advice',
+            link: '/financial-planning'
+          }
+        ];
+        break;
+
+      case 'health':
+        personalizedInsight = `As a ${age}-year-old, you can access up to 16 free counselling sessions annually.`;
+        personalizedForYou = `This health initiative is particularly relevant for someone in your age group. As a ${age}-year-old ${occupation.toLowerCase()}, you may benefit from expanded mental health services and preventive care programs.`;
+        positiveBenefits = [
+          'Access to free mental health services',
+          'Preventive health screenings available',
+          'Workplace wellness programs',
+          'Community health initiatives in your area'
+        ];
+        actionItems = [
+          {
+            type: 'article' as const,
+            title: 'Health Services Near You',
+            description: `Find healthcare providers in ${location.split(',')[0]}`,
+            link: '/health-services'
+          },
+          {
+            type: 'article' as const,
+            title: 'Mental Health Support',
+            description: 'Access counselling and mental health resources',
+            link: '/mental-health'
+          },
+          {
+            type: 'article' as const,
+            title: 'Fitness and Wellness',
+            description: 'Discover local gyms and wellness programs',
+            link: '/fitness'
+          },
+          {
+            type: 'article' as const,
+            title: 'Health Insurance Guide',
+            description: 'Understand your health insurance options',
+            link: '/insurance'
+          }
+        ];
+        break;
+
+      case 'environment':
+        if (interests.includes('Environment')) {
+          personalizedInsight = `This environmental initiative aligns with your interests and could improve air quality in ${location.split(',')[0]}.`;
+          personalizedForYou = `Given your interest in environmental issues and location in ${location}, this development could directly impact your local environment and potentially create new opportunities in green industries.`;
+          positiveBenefits = [
+            'Improved air and water quality in your area',
+            'New green job opportunities',
+            'Reduced environmental health risks',
+            'Community sustainability programs'
+          ];
+        } else {
+          personalizedInsight = `This environmental change may affect your local area and daily commute.`;
+          personalizedForYou = `As a resident of ${location}, these environmental changes could affect your daily life, from air quality to transportation options.`;
+          positiveBenefits = [
+            'Cleaner environment in your area',
+            'Potential cost savings on utilities',
+            'Improved public transport options',
+            'Healthier community spaces'
+          ];
+        }
+        actionItems = [
+          {
+            type: 'article' as const,
+            title: 'Green Living Tips',
+            description: 'Learn how to live more sustainably',
+            link: '/green-living'
+          },
+          {
+            type: 'article' as const,
+            title: 'Environmental Jobs',
+            description: 'Explore career opportunities in green industries',
+            link: '/green-jobs'
+          },
+          {
+            type: 'article' as const,
+            title: 'Local Environmental Groups',
+            description: 'Join community environmental initiatives',
+            link: '/environmental-groups'
+          },
+          {
+            type: 'article' as const,
+            title: 'Sustainability Grants',
+            description: 'Find funding for eco-friendly home improvements',
+            link: '/sustainability-grants'
+          }
+        ];
+        break;
+
+      case 'technology':
+        if (interests.includes('Technology') || occupation.toLowerCase().includes('developer') || occupation.toLowerCase().includes('tech')) {
+          personalizedInsight = `As someone in tech, this development could create new opportunities in your field.`;
+          personalizedForYou = `Given your background as a ${occupation.toLowerCase()} with interest in technology, this development could open new career paths and learning opportunities in your field.`;
+          positiveBenefits = [
+            'New job opportunities in emerging tech',
+            'Skill development programs available',
+            'Networking opportunities with tech professionals',
+            'Access to latest technology training'
+          ];
+        } else {
+          personalizedInsight = `This technology advancement could simplify services you use daily.`;
+          personalizedForYou = `As a ${age}-year-old professional, these technological advances could make various services more accessible and efficient for your daily life.`;
+          positiveBenefits = [
+            'Improved digital services',
+            'More convenient online tools',
+            'Better connectivity options',
+            'Enhanced digital security'
+          ];
+        }
+        actionItems = [
+          {
+            type: 'article' as const,
+            title: 'Tech Career Opportunities',
+            description: 'Explore jobs in the technology sector',
+            link: '/tech-jobs'
+          },
+          {
+            type: 'article' as const,
+            title: 'Digital Skills Training',
+            description: 'Learn new digital skills and technologies',
+            link: '/digital-training'
+          },
+          {
+            type: 'article' as const,
+            title: 'Tech Community Events',
+            description: 'Join local technology meetups and events',
+            link: '/tech-events'
+          },
+          {
+            type: 'article' as const,
+            title: 'Innovation Hub',
+            description: 'Connect with startups and innovation programs',
+            link: '/innovation'
+          }
+        ];
+        break;
+
+      default:
+        personalizedInsight = `This development could have implications for your life in ${location.split(',')[0]}.`;
+        personalizedForYou = `As a ${age}-year-old ${occupation.toLowerCase()} living in ${location}, this news could impact various aspects of your community and daily life.`;
+        positiveBenefits = [
+          'Potential positive community impact',
+          'New opportunities may arise',
+          'Improved local services',
+          'Enhanced quality of life'
+        ];
+        actionItems = [
+          {
+            type: 'article' as const,
+            title: 'Community Resources',
+            description: 'Find local services and support',
+            link: '/community-resources'
+          },
+          {
+            type: 'article' as const,
+            title: 'Local News Updates',
+            description: 'Stay informed about your area',
+            link: '/local-news'
+          }
+        ];
+    }
+
+    return {
+      personalizedInsight,
+      personalizedForYou,
+      positiveBenefits,
+      actionItems
+    };
+  };
+
   const generateMoreArticles = () => {
     const sources = ['Stuff.co.nz', 'The Press', 'The Post', 'Waikato Times'];
     const categories = ['Politics', 'Economy', 'Health', 'Environment', 'Technology'];
@@ -246,10 +510,33 @@ const Index = () => {
   useEffect(() => {
     // Simulate loading
     setTimeout(() => {
-      setArticles([...mockArticles, ...generateMoreArticles()]);
+      const baseArticles = [...mockArticles, ...generateMoreArticles()];
+      // Add personalized content to all articles
+      const personalizedArticles = baseArticles.map(article => {
+        const personalizedContent = generatePersonalizedContent(article, userProfile);
+        return {
+          ...article,
+          ...personalizedContent
+        };
+      });
+      setArticles(personalizedArticles);
       setLoading(false);
     }, 1500);
-  }, []);
+  }, [userProfile]); // Add userProfile as dependency
+
+  const handleProfileUpdate = (newProfile: any) => {
+    setUserProfile(newProfile);
+    // Regenerate personalized content for all articles
+    setArticles(prevArticles => 
+      prevArticles.map(article => {
+        const personalizedContent = generatePersonalizedContent(article, newProfile);
+        return {
+          ...article,
+          ...personalizedContent
+        };
+      })
+    );
+  };
 
   const filteredArticles = activeCategory === 'all' 
     ? articles 
@@ -389,7 +676,7 @@ const Index = () => {
         <div className="p-4">
           <EditableProfile 
             profile={userProfile}
-            onProfileUpdate={setUserProfile}
+            onProfileUpdate={handleProfileUpdate}
           />
         </div>
       )}

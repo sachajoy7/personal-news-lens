@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, BookmarkIcon, Share, Headphones, Video } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -143,19 +144,19 @@ const ArticleView = ({ article, relatedArticles, onBack, onBookmark, onShare, on
                 // Add pull quote after first paragraph
                 if (index === 0 && article.pullQuote) {
                   return (
-                    <React.Fragment key={index}>
+                    <div key={index}>
                       <p>{paragraph}</p>
                       <blockquote className="border-l-4 border-blue-500 pl-4 py-2 my-6 bg-blue-50 italic text-lg font-medium text-gray-800">
                         "{article.pullQuote}"
                       </blockquote>
-                    </React.Fragment>
+                    </div>
                   );
                 }
                 
                 // Add images throughout the article
                 if (index === 2 && article.contentImages && article.contentImages[0]) {
                   return (
-                    <React.Fragment key={index}>
+                    <div key={index}>
                       <p>{paragraph}</p>
                       <div className="my-6">
                         <img 
@@ -164,7 +165,7 @@ const ArticleView = ({ article, relatedArticles, onBack, onBookmark, onShare, on
                           className="w-full rounded-lg"
                         />
                       </div>
-                    </React.Fragment>
+                    </div>
                   );
                 }
                 
