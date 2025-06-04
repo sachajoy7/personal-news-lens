@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { BookmarkIcon, Share, headphones, video } from 'lucide-react';
+import { BookmarkIcon, Share, Headphones, Video } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -48,12 +47,12 @@ const ArticleCard = ({ article, onBookmark, onShare, onClick }: ArticleCardProps
           </Badge>
           {article.hasAudio && (
             <Badge className="bg-purple-500 text-white px-2 py-1">
-              <headphones className="w-3 h-3" />
+              <Headphones className="w-3 h-3" />
             </Badge>
           )}
           {article.hasVideo && (
             <Badge className="bg-red-500 text-white px-2 py-1">
-              <video className="w-3 h-3" />
+              <Video className="w-3 h-3" />
             </Badge>
           )}
         </div>

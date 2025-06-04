@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { ArrowLeft, BookmarkIcon, Share, headphones, video } from 'lucide-react';
+import { ArrowLeft, BookmarkIcon, Share, Headphones, Video } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import PersonalizedSummary from './PersonalizedSummary';
@@ -66,7 +65,7 @@ const ArticleView = ({ article, relatedArticles, onBack, onBookmark, onShare, on
                 className="p-2"
                 onClick={handlePlayAudio}
               >
-                <headphones className="w-5 h-5" />
+                <Headphones className="w-5 h-5" />
               </Button>
             )}
             {article.hasVideo && (
@@ -76,7 +75,7 @@ const ArticleView = ({ article, relatedArticles, onBack, onBookmark, onShare, on
                 className="p-2"
                 onClick={handlePlayVideo}
               >
-                <video className="w-5 h-5" />
+                <Video className="w-5 h-5" />
               </Button>
             )}
             <Button
