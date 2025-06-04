@@ -16,7 +16,7 @@ const Header = ({
         
         <div className="text-center">
           <h1 className="font-bold text-4xl text-violet-600">Stuff</h1>
-          <p className="text-xs text-gray-500">New Zealand News</p>
+          <p className="text-xs text-gray-500">Aotearoa Welcome Stewart</p>
         </div>
         
         <Button variant="ghost" size="sm" className="p-2" onClick={onSearchClick}>
