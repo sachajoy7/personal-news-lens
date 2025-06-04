@@ -29,14 +29,8 @@ const PersonalizedSummary = ({ article }: PersonalizedSummaryProps) => {
   };
 
   const getActionColor = (type: string) => {
-    switch (type) {
-      case 'contact':
-        return 'bg-green-500 hover:bg-green-600';
-      case 'resource':
-        return 'bg-purple-500 hover:bg-purple-600';
-      default:
-        return 'bg-blue-500 hover:bg-blue-600';
-    }
+    // Make all action items orange to match the heading
+    return 'bg-orange-500 hover:bg-orange-600';
   };
 
   return (

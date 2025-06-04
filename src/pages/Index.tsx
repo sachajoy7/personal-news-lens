@@ -63,21 +63,27 @@ const Index = () => {
       actionItems: [
         {
           type: 'article',
-          title: 'Home Buying Guide 2024',
-          description: 'Complete guide for first-time buyers in NZ',
-          link: '/article/home-buying-guide-2024'
+          title: 'Find Your Dream Property',
+          description: 'Browse available properties in Auckland within your budget',
+          link: '/property-search'
         },
         {
           type: 'article',
-          title: 'Auckland Housing Market Analysis',
-          description: 'Latest trends and predictions for Auckland property',
-          link: '/article/auckland-housing-analysis'
+          title: 'Home Buying Guide 2024',
+          description: 'Complete step-by-step guide for first-time buyers',
+          link: '/guides/home-buying'
         },
         {
-          type: 'contact',
-          title: 'Contact Local MP',
-          description: 'Share your housing story with Chloe Swarbrick',
-          link: 'mailto:chloe.swarbrick@parliament.govt.nz'
+          type: 'article',
+          title: 'Mortgage Calculator',
+          description: 'Calculate your borrowing capacity and repayments',
+          link: '/tools/mortgage-calculator'
+        },
+        {
+          type: 'article',
+          title: 'First Home Grant Eligibility',
+          description: 'Check if you qualify for government assistance',
+          link: '/grants/first-home'
         }
       ]
     },
@@ -104,16 +110,28 @@ const Index = () => {
       ],
       actionItems: [
         {
-          type: 'resource',
-          title: 'Find Cheapest Fuel',
-          description: 'Use Gaspy app to find lowest prices near you',
-          link: 'https://gaspy.nz'
+          type: 'article',
+          title: 'Budget Planning Tools',
+          description: 'Manage your finances with our budgeting calculator',
+          link: '/tools/budget-planner'
         },
         {
           type: 'article',
-          title: 'Fuel-Efficient Driving Tips',
-          description: 'Learn to reduce your fuel consumption',
-          link: '#'
+          title: 'Find Cheapest Fuel Stations',
+          description: 'Locate the lowest fuel prices in your area',
+          link: '/fuel-prices'
+        },
+        {
+          type: 'article',
+          title: 'Car-Free Transport Options',
+          description: 'Explore public transport and cycling routes',
+          link: '/transport/alternatives'
+        },
+        {
+          type: 'article',
+          title: 'Energy Saving Tips',
+          description: 'Reduce your household energy costs',
+          link: '/guides/energy-saving'
         }
       ]
     },
@@ -140,22 +158,28 @@ const Index = () => {
       ],
       actionItems: [
         {
-          type: 'resource',
-          title: 'Book Free Session',
-          description: 'Find mental health providers in your area',
-          link: 'https://www.healthpoint.co.nz'
-        },
-        {
-          type: 'contact',
-          title: 'Mental Health Helpline',
-          description: 'Need immediate support? Call 1737',
-          link: 'tel:1737'
+          type: 'article',
+          title: 'Find Mental Health Services',
+          description: 'Locate counsellors and therapists in Auckland',
+          link: '/health/mental-health-providers'
         },
         {
           type: 'article',
-          title: 'Mental Health Self-Care Guide',
-          description: 'Tips for maintaining good mental health',
-          link: '#'
+          title: 'Book Free Counselling Session',
+          description: 'Schedule your first appointment online',
+          link: '/health/book-counselling'
+        },
+        {
+          type: 'article',
+          title: 'Mental Health Self-Assessment',
+          description: 'Take a quick wellness check and get resources',
+          link: '/health/self-assessment'
+        },
+        {
+          type: 'article',
+          title: 'Workplace Mental Health Support',
+          description: 'Access employee assistance programs',
+          link: '/workplace/mental-health'
         }
       ]
     }
